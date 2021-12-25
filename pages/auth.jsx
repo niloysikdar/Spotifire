@@ -7,10 +7,10 @@ const Auth = ({ providers }) => {
   return (
     <div className='min-h-screen flex flex-col justify-center items-center bg-[#2941ab] text-white text-center p-5'>
       <Image src={SpotifyImage} alt='Spotify Image' width={200} height={200} />
-      <h2 className='text-white text-3xl mt-8'>
+      <h2 className='text-[#1ed760] text-4xl font-bold mt-8'>
         Login With Spotify Right Now!
       </h2>
-      <p className='mt-2 mb-10 text-lg text-gray-200'>
+      <p className='mt-2 mb-10 text-xl font-medium text-[#1ed760]'>
         Control your Spotify Player and listen to your favourite music from
         anywhere :)
       </p>
