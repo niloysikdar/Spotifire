@@ -1,13 +1,31 @@
-import { HomeIcon, SearchIcon, LibraryIcon } from '@heroicons/react/outline';
-
+import {
+  HomeIcon,
+  SearchIcon,
+  LibraryIcon,
+  LogoutIcon,
+} from '@heroicons/react/outline';
 import { PlusCircleIcon, HeartIcon } from '@heroicons/react/solid';
+
+import { signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
 const values = [...Array(10).keys()];
 
 const Sidebar = () => {
+  const { data: session, status } = useSession();
+
+  console.log(session, status);
+
   return (
     <div className='text-[#b3b3b3] p-5 h-screen w-52 border-r-2'>
       <div className='space-y-5'>
+        <button
+          className='flex items-center space-x-3 hover:text-white'
+          onClick={() => signOut()}
+        >
+          <LogoutIcon className='h-5 w-5' /> <p>Logout</p>
+        </button>
+
         <button className='flex items-center space-x-3 hover:text-white'>
           <HomeIcon className='h-5 w-5' /> <p>Home</p>
         </button>
