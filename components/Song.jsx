@@ -1,10 +1,31 @@
 import { useSpotify } from '../hooks/useSpotify';
+import { currentTrackState, isPlayingState } from '../atoms/songAtom';
+import { useRecoilState } from 'recoil';
 
 const Song = ({ index, track }) => {
   const spotifyApi = useSpotify();
+  const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
+  const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
+
+  const selectTrack = (track) => {
+    spotifyApi
+      .play({
+        uris: [track.track.uri],
+      })
+      .then(() => {
+        setCurrentTrack(track.track.id);
+        setIsPlaying(true);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
 
   return (
-    <div className='grid grid-cols-2 py-1.5 px-5 pr-12 text-gray-200 cursor-pointer rounded bg-neutral-900 hover:bg-neutral-800'>
+    <div
+      className='grid grid-cols-2 py-1.5 px-5 pr-12 text-gray-200 cursor-pointer rounded bg-neutral-900 hover:bg-neutral-800'
+      onClick={() => selectTrack(track)}
+    >
       <div className='flex items-center'>
         <p className='text-lg'>{index + 1}</p>
         <img
