@@ -5,6 +5,9 @@ import { ChevronDownIcon } from '@heroicons/react/outline';
 import { shuffle } from 'lodash';
 
 import profileImage from '../assets/profile.jpg';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import { playlistIdState, playlistDataAtom } from '../atoms/playlistAtom';
+import { useSpotify } from '../hooks/useSpotify';
 
 const colors = [
   'from-indigo-500',
@@ -18,12 +21,24 @@ const colors = [
 
 const CenterDiv = () => {
   const { data: session } = useSession();
+  const spotifyApi = useSpotify();
   const [startColor, setStartColor] = useState(null);
+  const playlistId = useRecoilValue(playlistIdState);
+  const [playlistData, setplaylistData] = useRecoilState(playlistDataAtom);
 
   useEffect(() => {
     const newColor = shuffle(colors)[0];
     setStartColor(newColor);
-  }, []);
+  }, [playlistId]);
+
+  useEffect(() => {
+    if (!playlistData && spotifyApi.getAccessToken()) {
+      spotifyApi.getPlaylist(playlistId).then((res) => {
+        console.log(res.body);
+        setplaylistData(res.body);
+      });
+    }
+  }, [session, spotifyApi, playlistId]);
 
   return (
     <div className='flex-grow'>
@@ -44,7 +59,13 @@ const CenterDiv = () => {
       <div
         className={`flex items-end space-x-7 bg-gradient-to-b to-black ${startColor} h-80 w-100`}
       >
-        <h2 className='text-white'>{startColor}</h2>
+        <img
+          src={playlistData?.images[0].url}
+          alt={playlistData?.name}
+          className='h-44 w-44 shadow-2xl'
+        />
+
+        <h2 className='text-white'>{playlistData?.name}</h2>
       </div>
     </div>
   );

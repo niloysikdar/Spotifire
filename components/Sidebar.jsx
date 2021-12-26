@@ -1,4 +1,9 @@
 import { useState, useEffect } from 'react';
+import { signOut, useSession } from 'next-auth/react';
+import { useSpotify } from '../hooks/useSpotify';
+import { useRecoilState } from 'recoil';
+import { playlistIdState, playlistDataAtom } from '../atoms/playlistAtom';
+
 import {
   HomeIcon,
   SearchIcon,
@@ -7,15 +12,12 @@ import {
 } from '@heroicons/react/outline';
 import { PlusCircleIcon, HeartIcon } from '@heroicons/react/solid';
 
-import { signOut, useSession } from 'next-auth/react';
-import { useSpotify } from '../hooks/useSpotify';
-
-const values = [...Array(15).keys()];
-
 const Sidebar = () => {
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
   const [playlists, setPlaylists] = useState([]);
+  const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);
+  const [playlistData, setplaylistData] = useRecoilState(playlistDataAtom);
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
@@ -63,7 +65,14 @@ const Sidebar = () => {
       {/* Playlist */}
       <div className='py-3 space-y-2'>
         {playlists?.map((item) => (
-          <p key={item.id} className='py-1 cursor-pointer hover:text-white'>
+          <p
+            key={item.id}
+            className='py-1 cursor-pointer hover:text-white'
+            onClick={() => {
+              setPlaylistId(item.id);
+              setplaylistData(item);
+            }}
+          >
             {item.name}
           </p>
         ))}
