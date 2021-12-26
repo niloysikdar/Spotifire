@@ -7,17 +7,12 @@ import {
 import { PlusCircleIcon, HeartIcon } from '@heroicons/react/solid';
 
 import { signOut } from 'next-auth/react';
-import { useSession } from 'next-auth/react';
 
-const values = [...Array(10).keys()];
+const values = [...Array(15).keys()];
 
 const Sidebar = () => {
-  const { data: session, status } = useSession();
-
-  console.log(session, status);
-
   return (
-    <div className='text-[#b3b3b3] p-5 h-screen w-52 border-r-2'>
+    <div className='text-[#b3b3b3] p-5 h-screen w-52 border-r-[0.1px] overflow-y-scroll scrollbar-hide  '>
       <div className='space-y-5'>
         <button
           className='flex items-center space-x-3 hover:text-white'
