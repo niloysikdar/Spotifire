@@ -14,10 +14,8 @@ import { PlusCircleIcon, HeartIcon } from '@heroicons/react/solid';
 
 const Sidebar = () => {
   const spotifyApi = useSpotify();
-  const { data: session, status } = useSession();
   const [playlists, setPlaylists] = useState([]);
   const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);
-  const [playlistData, setplaylistData] = useRecoilState(playlistDataAtom);
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {

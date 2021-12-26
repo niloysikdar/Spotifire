@@ -49,8 +49,8 @@ const CenterDiv = () => {
           <Image
             src={session?.user.image || profileImage}
             alt={session?.user.name}
-            height={35}
-            width={35}
+            height={30}
+            width={30}
             className='h-9 w-9 rounded-full'
           />
           <h2 className='font-medium'>{session?.user.name}</h2>
@@ -74,8 +74,11 @@ const CenterDiv = () => {
           </h2>
           <p className='text-gray-200'>{playlistData?.description}</p>
           <p className='text-gray-300 mt-2'>
-            By {playlistData?.owner.display_name}, {playlistData?.tracks.total}{' '}
-            songs
+            By{' '}
+            <span className='font-semibold'>
+              {playlistData?.owner.display_name}
+            </span>
+            , {playlistData?.tracks.total} songs
           </p>
         </div>
       </div>
