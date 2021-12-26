@@ -9,6 +9,8 @@ import { useRecoilValue, useRecoilState } from 'recoil';
 import { playlistIdState, playlistDataAtom } from '../atoms/playlistAtom';
 import { useSpotify } from '../hooks/useSpotify';
 
+import AllSongs from '../components/AllSongs';
+
 const colors = [
   'from-indigo-500',
   'from-blue-500',
@@ -26,25 +28,23 @@ const CenterDiv = () => {
   const playlistId = useRecoilValue(playlistIdState);
   const [playlistData, setplaylistData] = useRecoilState(playlistDataAtom);
 
-  console.log(playlistData);
-
   useEffect(() => {
     const newColor = shuffle(colors)[0];
     setStartColor(newColor);
   }, [playlistId]);
 
   useEffect(() => {
-    if (!playlistData && spotifyApi.getAccessToken()) {
+    if (spotifyApi.getAccessToken()) {
       spotifyApi.getPlaylist(playlistId).then((res) => {
         console.log(res.body);
         setplaylistData(res.body);
       });
     }
-  }, [session, spotifyApi, playlistId]);
+  }, [spotifyApi, playlistId]);
 
   return (
-    <div className='flex-grow'>
-      <header className='absolute top-5 right-8'>
+    <div className='flex-grow h-screen overflow-y-scroll scrollbar-hide'>
+      <header className='absolute top-5 right-7'>
         <div className='flex items-center space-x-2 p-1 pr-2.5 cursor-pointer rounded-full bg-black text-white hover:bg-gray-900'>
           <Image
             src={session?.user.image || profileImage}
@@ -79,6 +79,8 @@ const CenterDiv = () => {
           </p>
         </div>
       </div>
+
+      <AllSongs />
     </div>
   );
 };

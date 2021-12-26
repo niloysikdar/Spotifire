@@ -25,10 +25,10 @@ const Sidebar = () => {
         setPlaylists(res.body.items);
       });
     }
-  }, [session, spotifyApi]);
+  }, [spotifyApi]);
 
   return (
-    <div className='text-[#b3b3b3] p-5 h-screen w-52 border-r-[0.1px] overflow-y-scroll scrollbar-hide  '>
+    <div className='text-[#b3b3b3] text-sm lg:text-base p-5 h-screen sm:max-w-[12rem] lg:max-w-[15rem] border-r border-gray-800 overflow-y-scroll scrollbar-hide hidden md:inline'>
       <div className='space-y-5'>
         <button
           className='flex items-center space-x-3 hover:text-white'
@@ -67,11 +67,8 @@ const Sidebar = () => {
         {playlists?.map((item) => (
           <p
             key={item.id}
-            className='py-1 cursor-pointer hover:text-white'
-            onClick={() => {
-              setPlaylistId(item.id);
-              setplaylistData(item);
-            }}
+            className='py-1 pr-1 cursor-pointer hover:text-white'
+            onClick={() => setPlaylistId(item.id)}
           >
             {item.name}
           </p>
