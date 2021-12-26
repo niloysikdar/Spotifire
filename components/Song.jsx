@@ -1,6 +1,10 @@
 import { useSpotify } from '../hooks/useSpotify';
 import { currentTrackState, isPlayingState } from '../atoms/songAtom';
 import { useRecoilState } from 'recoil';
+import { useState } from 'react';
+
+import { useAudio } from '../hooks/useAudio';
+import PlayTrack from './PlayTrack';
 
 const Song = ({ index, track }) => {
   const spotifyApi = useSpotify();
@@ -22,12 +26,11 @@ const Song = ({ index, track }) => {
   };
 
   return (
-    <div
-      className='grid grid-cols-2 py-1.5 px-5 pr-12 text-gray-200 cursor-pointer rounded bg-neutral-900 hover:bg-neutral-800'
-      onClick={() => selectTrack(track)}
-    >
+    <div className='grid grid-cols-2 py-1.5 px-5 pr-12 text-gray-200 rounded bg-neutral-900 hover:bg-neutral-800'>
       <div className='flex items-center'>
-        <p className='text-lg'>{index + 1}</p>
+        <PlayTrack url={track.track.preview_url} />
+
+        <p className='text-lg ml-4'>{index + 1}</p>
         <img
           src={track.track.album.images[2].url}
           alt={track.track.album.name}

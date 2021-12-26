@@ -3,7 +3,7 @@ import { ClockIcon } from '@heroicons/react/outline';
 const SongsHeader = () => {
   return (
     <div className='grid grid-cols-2 py-1.5 px-5 pr-12 text-gray-300 border-b border-gray-800'>
-      <div className='flex items-center'>
+      <div className='flex items-center ml-12'>
         <p className='text-lg font-bold'>#</p>
 
         <div className='flex flex-col justify-center'>
