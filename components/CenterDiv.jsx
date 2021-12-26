@@ -26,6 +26,8 @@ const CenterDiv = () => {
   const playlistId = useRecoilValue(playlistIdState);
   const [playlistData, setplaylistData] = useRecoilState(playlistDataAtom);
 
+  console.log(playlistData);
+
   useEffect(() => {
     const newColor = shuffle(colors)[0];
     setStartColor(newColor);
@@ -57,7 +59,7 @@ const CenterDiv = () => {
       </header>
 
       <div
-        className={`flex items-end space-x-7 bg-gradient-to-b to-black ${startColor} h-80 w-100`}
+        className={`flex items-end space-x-7 bg-gradient-to-b to-black ${startColor} h-80 text-white p-8`}
       >
         <img
           src={playlistData?.images[0].url}
@@ -65,7 +67,17 @@ const CenterDiv = () => {
           className='h-44 w-44 shadow-2xl'
         />
 
-        <h2 className='text-white'>{playlistData?.name}</h2>
+        <div>
+          <p className='font-bold'>PLAYLIST</p>
+          <h2 className='text-2xl md:text-3xl xl:text-5xl font-bold'>
+            {playlistData?.name}
+          </h2>
+          <p className='text-gray-200'>{playlistData?.description}</p>
+          <p className='text-gray-300 mt-2'>
+            By {playlistData?.owner.display_name}, {playlistData?.tracks.total}{' '}
+            songs
+          </p>
+        </div>
       </div>
     </div>
   );
