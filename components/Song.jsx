@@ -1,10 +1,9 @@
 import { useSpotify } from '../hooks/useSpotify';
 import { currentTrackState, isPlayingState } from '../atoms/songAtom';
 import { useRecoilState } from 'recoil';
-import { useState } from 'react';
 
-import { useAudio } from '../hooks/useAudio';
 import PlayTrack from './PlayTrack';
+import { BanIcon } from '@heroicons/react/solid';
 
 const Song = ({ index, track }) => {
   const spotifyApi = useSpotify();
@@ -28,7 +27,13 @@ const Song = ({ index, track }) => {
   return (
     <div className='grid grid-cols-2 py-1.5 px-5 pr-12 text-gray-200 rounded bg-neutral-900 hover:bg-neutral-800'>
       <div className='flex items-center'>
-        <PlayTrack url={track.track.preview_url} />
+        {track.track.preview_url ? (
+          <PlayTrack url={track.track.preview_url} />
+        ) : (
+          <button>
+            <BanIcon className='h-8 w-8' />
+          </button>
+        )}
 
         <p className='text-lg ml-4'>{index + 1}</p>
         <img
@@ -48,7 +53,9 @@ const Song = ({ index, track }) => {
         <p className='hidden md:inline w-36 lg:w-64 truncate'>
           {track.track.album.name}
         </p>
-        <p>{millisToMinutesAndSeconds(track.track.duration_ms)}</p>
+        <p className='hidden sm:inline'>
+          {millisToMinutesAndSeconds(track.track.duration_ms)}
+        </p>
       </div>
     </div>
   );

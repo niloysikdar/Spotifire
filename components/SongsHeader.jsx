@@ -13,7 +13,7 @@ const SongsHeader = () => {
 
       <div className='flex items-center justify-between ml-auto md:ml-0'>
         <p className='hidden md:inline'>ALBUM</p>
-        <ClockIcon className='h-5 w-5' />
+        <ClockIcon className='h-5 w-5 hidden sm:inline' />
       </div>
     </div>
   );

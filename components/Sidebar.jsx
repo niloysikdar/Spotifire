@@ -1,15 +1,9 @@
 import { useState, useEffect } from 'react';
-import { signOut, useSession } from 'next-auth/react';
 import { useSpotify } from '../hooks/useSpotify';
 import { useRecoilState } from 'recoil';
-import { playlistIdState, playlistDataAtom } from '../atoms/playlistAtom';
+import { playlistIdState } from '../atoms/playlistAtom';
 
-import {
-  HomeIcon,
-  SearchIcon,
-  LibraryIcon,
-  LogoutIcon,
-} from '@heroicons/react/outline';
+import { HomeIcon, SearchIcon, LibraryIcon } from '@heroicons/react/outline';
 import { PlusCircleIcon, HeartIcon } from '@heroicons/react/solid';
 
 const Sidebar = () => {
@@ -28,13 +22,6 @@ const Sidebar = () => {
   return (
     <div className='text-[#b3b3b3] text-sm lg:text-base p-5 h-screen sm:max-w-[12rem] lg:max-w-[15rem] border-r border-gray-800 overflow-y-scroll scrollbar-hide hidden md:inline'>
       <div className='space-y-5'>
-        <button
-          className='flex items-center space-x-3 hover:text-white'
-          onClick={() => signOut()}
-        >
-          <LogoutIcon className='h-5 w-5' /> <p>Logout</p>
-        </button>
-
         <button className='flex items-center space-x-3 hover:text-white'>
           <HomeIcon className='h-5 w-5' /> <p>Home</p>
         </button>

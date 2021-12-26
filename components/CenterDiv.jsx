@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
-import { ChevronDownIcon } from '@heroicons/react/outline';
+import { useSession, signOut } from 'next-auth/react';
+import { LogoutIcon } from '@heroicons/react/outline';
 import { shuffle } from 'lodash';
 
 import profileImage from '../assets/profile.jpg';
@@ -45,7 +45,10 @@ const CenterDiv = () => {
   return (
     <div className='flex-grow h-screen overflow-y-scroll scrollbar-hide'>
       <header className='absolute top-5 right-7'>
-        <div className='flex items-center space-x-2 p-1 pr-2.5 cursor-pointer rounded-full bg-black text-white hover:bg-gray-900'>
+        <div
+          className='flex items-center space-x-2 p-1 pr-2.5 cursor-pointer rounded-full bg-black text-white hover:bg-gray-900'
+          onClick={() => signOut()}
+        >
           <Image
             src={session?.user.image || profileImage}
             alt={session?.user.name}
@@ -54,7 +57,7 @@ const CenterDiv = () => {
             className='h-9 w-9 rounded-full'
           />
           <h2 className='font-medium'>{session?.user.name}</h2>
-          <ChevronDownIcon className='h-5 w5' />
+          <LogoutIcon className='h-5 w5' />
         </div>
       </header>
 
