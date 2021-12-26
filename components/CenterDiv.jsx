@@ -35,10 +35,9 @@ const CenterDiv = () => {
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
-      spotifyApi.getPlaylist(playlistId).then((res) => {
-        console.log(res.body);
-        setplaylistData(res.body);
-      });
+      spotifyApi
+        .getPlaylist(playlistId)
+        .then((res) => setplaylistData(res.body));
     }
   }, [spotifyApi, playlistId]);
 
@@ -78,9 +77,13 @@ const CenterDiv = () => {
           <p className='text-gray-200'>{playlistData?.description}</p>
           <p className='text-gray-300 mt-2'>
             By{' '}
-            <span className='font-semibold'>
+            <a
+              className='font-semibold underline'
+              href={playlistData?.owner.external_urls.spotify}
+              target='_blank'
+            >
               {playlistData?.owner.display_name}
-            </span>
+            </a>
             , {playlistData?.tracks.total} songs
           </p>
         </div>
