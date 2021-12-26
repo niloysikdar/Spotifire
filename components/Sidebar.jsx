@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import {
   HomeIcon,
   SearchIcon,
@@ -6,11 +7,24 @@ import {
 } from '@heroicons/react/outline';
 import { PlusCircleIcon, HeartIcon } from '@heroicons/react/solid';
 
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
+import { useSpotify } from '../hooks/useSpotify';
 
 const values = [...Array(15).keys()];
 
 const Sidebar = () => {
+  const spotifyApi = useSpotify();
+  const { data: session, status } = useSession();
+  const [playlists, setPlaylists] = useState([]);
+
+  useEffect(() => {
+    if (spotifyApi.getAccessToken()) {
+      spotifyApi.getUserPlaylists().then((res) => {
+        setPlaylists(res.body.items);
+      });
+    }
+  }, [session, spotifyApi]);
+
   return (
     <div className='text-[#b3b3b3] p-5 h-screen w-52 border-r-[0.1px] overflow-y-scroll scrollbar-hide  '>
       <div className='space-y-5'>
@@ -48,9 +62,9 @@ const Sidebar = () => {
 
       {/* Playlist */}
       <div className='py-3 space-y-2'>
-        {values.map((value) => (
-          <p key={value} className='py-1 cursor-pointer hover:text-white'>
-            New Playlist
+        {playlists?.map((item) => (
+          <p key={item.id} className='py-1 cursor-pointer hover:text-white'>
+            {item.name}
           </p>
         ))}
       </div>

@@ -28,7 +28,7 @@ const CenterDiv = () => {
   return (
     <div className='flex-grow'>
       <header className='absolute top-5 right-8'>
-        <div className='flex items-center space-x-2 p-1 pr-2.5 cursor-pointer rounded-full bg-black text-white'>
+        <div className='flex items-center space-x-2 p-1 pr-2.5 cursor-pointer rounded-full bg-black text-white hover:bg-gray-900'>
           <Image
             src={session?.user.image || profileImage}
             alt={session?.user.name}
