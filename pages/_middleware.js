@@ -5,6 +5,9 @@ export const middleware = async (req) => {
   // token will exist if user is logged in
   const token = await getToken({
     req,
+    secureCookie:
+      process.env.NEXTAUTH_URL?.startsWith('https://') ??
+      !!process.env.VERCEL_URL,
     secret: process.env.JWT_SECRET,
   });
 
