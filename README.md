@@ -78,8 +78,10 @@ To get a local copy up and running follow these simple steps.
 
 <img src="https://i.imgur.com/1M6tuG8.png" height="220">
 <img src="https://i.imgur.com/Z3khNGD.png" height="220">
+<p>
 <img src="https://i.imgur.com/gMyOigm.png" height="220">
 <img src="https://i.imgur.com/UzOXutZ.png" height="220">
+</p>
 
 <!-- ROADMAP -->
 
