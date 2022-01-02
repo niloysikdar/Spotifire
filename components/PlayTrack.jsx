@@ -1,14 +1,12 @@
-import { useEffect } from 'react';
-
-import { useAudio } from '../hooks/useAudio';
-import { PlayIcon, PauseIcon, StopIcon } from '@heroicons/react/solid';
+import { useAudio } from 'react-awesome-audio';
+import { PlayIcon, PauseIcon } from '@heroicons/react/solid';
 
 const PlayTrack = ({ url }) => {
-  const [playing, toggle] = useAudio(url);
+  const { isPlaying, toggle } = useAudio({ src: url });
 
   return (
     <button onClick={toggle}>
-      {playing ? (
+      {isPlaying ? (
         <PauseIcon className='h-8 w-8' />
       ) : (
         <PlayIcon className='h-8 w-8' />

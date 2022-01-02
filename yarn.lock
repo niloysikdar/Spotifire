@@ -2291,6 +2291,11 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-awesome-audio@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-awesome-audio/-/react-awesome-audio-1.1.0.tgz#110272a3c645567e8a2f92743b6bdbc4af5eb5eb"
+  integrity sha512-O0MIf1wkCTq+pEhUQtZpg+qSsRKMOCz/fW3xb8gXoLSGkkfMCh2AWcneBDBw8JLH6M/htDiGLM23u4Fn1N5e4w==
+
 react-dom@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
